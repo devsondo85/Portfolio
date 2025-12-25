@@ -1,83 +1,551 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Valery Sondo's Portfolio</title>
+    <title>Valery Sondo - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 2rem 6rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2d3748;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            text-align: left;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #4a5568;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        #projects {
+            background: #f7fafc;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-card h3 {
+            color: #667eea;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #e6f2ff;
+            color: #667eea;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .profile-img {
+                margin: 0 auto;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <h1>Valery Sondo's Portfolio</h1>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+    <header>
+        <nav>
+            <div class="logo">Valery Sondo</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <!-- Home Section -->
-    <section id="home">
-        <h2>Welcome</h2>
-        <p>Hi, I'm Valery Sondo, a CS student passionate about full-stack web development and data-driven insights.</p>
+    <section class="hero" id="home">
+        <h1>Welcome to My Portfolio</h1>
+        <p>Hi, I\'m Valery Sondo, a CS student passionate about full-stack web development and data-driven insights.</p>
     </section>
 
-    <!-- About Section -->
     <section id="about">
-        <h2>About Me</h2>
-        <img src="https://lh3.googleusercontent.com/a/ACg8ocKdip_FATDqrRqG_40R8SqssbVh6fw905DkCiHvqxJcgj60HlhZ2g=s576-c-no" alt="Valery Sondo's Profile Picture" class="profile-img">
-        <p>I’m Valery Sondo, a Computer Science student exploring full-stack web development with a passion for data-driven insights. I am pursuing a minor in statistics to strengthen my data analysis skills. I focus on JavaScript/TypeScript and Python, balancing frontend usability with backend reliability.</p>
-        <h3>Skills</h3>
-        <ul>
-            <li>JavaScript/TypeScript</li>
-            <li>Python</li>
-            <li>HTML & CSS</li>
-            <li>Data Analysis</li>
-        </ul>
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <img src="https://via.placeholder.com/250" alt="Valery Sondo" class="profile-img">
+            <div class="about-text">
+                <p>I\'m Valery Sondo, a Computer Science student exploring full-stack web development with a passion for data-driven insights. I am pursuing a minor in statistics to strengthen my data analysis skills.</p>
+                <p>I focus on JavaScript/TypeScript and Python, balancing frontend usability with backend reliability. My goal is to build applications that are not only functional but also provide meaningful insights through data.</p>
+            </div>
+        </div>
+
+        <h3 style="text-align: center; margin-top: 4rem; margin-bottom: 2rem; font-size: 2rem; color: #2d3748;">Skills</h3>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">⚡</div>
+                <h3>JavaScript/TypeScript</h3>
+                <p>Modern web applications with React and Node.js</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🐍</div>
+                <h3>Python</h3>
+                <p>Backend development and data analysis</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🎨</div>
+                <h3>HTML & CSS</h3>
+                <p>Responsive and accessible web design</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">📊</div>
+                <h3>Data Analysis</h3>
+                <p>Statistical insights and visualization</p>
+            </div>
+        </div>
     </section>
 
-    <!-- Projects Section -->
     <section id="projects">
-        <h2>My Projects</h2>
-        <ul>
-            <li>
-                <strong>Full-Stack Web App</strong>: A task management app with a user-friendly frontend and reliable backend.
-            </li>
-            <li>
-                <strong>Machine Learning Prototype</strong>: A model for predicting trends using Python and statistical methods.
-            </li>
-            <li>
-                <strong>Data Dashboard</strong>: An interactive dashboard for visualizing data insights.
-            </li>
-        </ul>
+        <h2 class="section-title">My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>Full-Stack Web App</h3>
+                    <p>A task management app with a user-friendly frontend and reliable backend.</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>Machine Learning Prototype</h3>
+                    <p>A model for predicting trends using Python and statistical methods.</p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Scikit-learn</span>
+                        <span class="tag">Pandas</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-content">
+                    <h3>Data Dashboard</h3>
+                    <p>An interactive dashboard for visualizing data insights.</p>
+                    <div class="project-tags">
+                        <span class="tag">D3.js</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Flask</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact">
-        <h2>Contact Me</h2>
-        <form id="contactForm">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
-            <label for="message">Message:</label>
-            <textarea id="message" name="message"></textarea>
-            <button type="submit">Send</button>
+        <h2 class="section-title">Contact Me</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
         </form>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Valery Sondo</p>
-        <div class="social-links">
-            <a href="https://github.com/your-username" target="_blank">GitHub</a>
-            <a href="https://linkedin.com/in/your-username" target="_blank">LinkedIn</a>
-        </div>
+        <p>&copy; 2025 Valery Sondo. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll(\'a[href^="#"]\').forEach(anchor => {
+            anchor.addEventListener('\'click\'\', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute(\'href\'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: \'smooth\',
+                        block: \'start\'
+                    });
+                }
+            });
+        });
+
+        // Active navigation highlighting
+        const sections = document.querySelectorAll(\'section\');
+        const navLinks = document.querySelectorAll(\'.nav-links a\');
+
+        window.addEventListener(\'scroll\', () => {
+            let current = \'\';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute(\'id\');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.background = \'\';
+                if (link.getAttribute(\'href\') === `#${current}`) {
+                    link.style.background = \'rgba(255,255,255,0.2)\';
+                }
+            });
+        });
+
+        // Form validation and submission
+        const contactForm = document.querySelector(\'.contact-form\');
+        contactForm.addEventListener(\'submit\', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById(\'name\').value.trim();
+            const email = document.getElementById(\'email\').value.trim();
+            const message = document.getElementById(\'message\').value.trim();
+
+            // Validation
+            if (name === \'\' || email === \'\' || message === \'\') {
+                alert(\'Please fill in all fields\');
+                return;
+            }
+
+            // Email validation
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                alert(\'Please enter a valid email address\');
+                return;
+            }
+
+            // Success message
+            alert(`Thank you, ${name}! Your message has been sent successfully.`);
+            
+            // Reset form
+            contactForm.reset();
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: \'0px 0px -100px 0px\'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = \'1\';
+                    entry.target.style.transform = \'translateY(0)\';
+                }
+            });
+        }, observerOptions);
+
+        // Observe skill cards and project cards
+        document.querySelectorAll(\'.skill-card, .project-card\').forEach(card => {
+            card.style.opacity = \'0\';
+            card.style.transform = \'translateY(20px)\';
+            card.style.transition = \'all 0.6s ease\';
+            observer.observe(card);
+        });
+
+        // Add typing effect to hero text (optional enhancement)
+        const heroText = document.querySelector(\'.hero p\');
+        const text = heroText.textContent;
+        heroText.textContent = \'\';
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+                heroText.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 30);
+            }
+        }
+
+        // Start typing effect after page load
+        window.addEventListener(\'load\', () => {
+            setTimeout(typeWriter, 500);
+        });
+    </script>
 </body>
 </html>
